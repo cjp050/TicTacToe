@@ -39,13 +39,53 @@ class TestTicTacToe < Minitest::Test
         assert_equal("playerx", change_player("playero"))
     end 
 
-    def test_8
-        grid =["x","o","x","x","o","o","x","o","x"]
-        assert_equal(true, full_board(grid))
-    end 
+    # def test_8
+    #     grid =["x","o","x","1","o","o","x","o","x"]
+    #     assert_equal(true, full_board(grid))
+    # end 
 
-    def grand_finally
-        grid =["x","o","x","x","o","o","x","o","x"]
-        assert_equal()
-    end 
+    def test_winner_1
+        grid = ["x","o","x","x","o","o","x","1","x"]
+        assert_equal(true, winner(grid))
+    end
+
+    def test_winner_2
+        grid = ["x","x","x","o","o","x","o","x","1"]
+        assert_equal(true, winner(grid))
+    end
+
+    def test_winner_3
+        grid = ["x","o","o","o","x","o","o","o","x"]
+        assert_equal(true, winner(grid))
+    end
+
+    # def winner_4
+    #     grid = ["x","o","x","x","o","o","x","1","x"]
+    #     assert_equal(true, winner?(grid))
+    # end
+
+    # def winner_5
+    #     grid = ["x","o","x","x","o","o","x","1","x"]
+    #     assert_equal(true, winner?(grid))
+    # end
+
+    # def winner_6
+    #     grid = ["x","o","x","x","o","o","x","1","x"]
+    #     assert_equal(true, winner?(grid))
+    # end
+
+    # def winner_7
+    #     grid = ["x","o","x","x","o","o","x","1","x"]
+    #     assert_equal(true, winner?(grid))
+    # end
+
+    # def winner_8
+    #     grid = ["x","o","x","x","o","o","x","1","x"]
+    #     assert_equal(true, winner?(grid))
+    # end
+
+    # def winner_9
+    #     grid = ["x","o","x","x","o","o","x","1","x"]
+    #     assert_equal(true, winner?(grid))
+    # end
 end
