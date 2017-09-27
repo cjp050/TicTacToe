@@ -46,17 +46,17 @@ class TestTicTacToe < Minitest::Test
 
     def test_winner_1
         grid = ["x","o","x","x","o","o","x","1","x"]
-        assert_equal(true, winner(grid))
+        assert_equal(true, winner?(grid))
     end
 
     def test_winner_2
         grid = ["x","x","x","o","o","x","o","x","1"]
-        assert_equal(true, winner(grid))
+        assert_equal(true, winner?(grid))
     end
 
     def test_winner_3
         grid = ["x","o","o","o","x","o","o","o","x"]
-        assert_equal(true, winner(grid))
+        assert_equal(true, winner?(grid))
     end
 
     # def winner_4

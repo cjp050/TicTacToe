@@ -30,9 +30,9 @@ def full_board(board)
 else 
     board_full = "false"
 end 
+end 
 
-def winner(board)
-    p "board is #{board}"
+def winner?(board)
           if  board[0] == "x" && board[1] == "x" && board[2] == "x" || board[0] == "o" && board[1] == "o" && board[2] == "o"
     true
         elsif board[3] == "x" && board[4] == "x" && board[5] == "x" || board[3] == "o" && board[4] == "o" && board[5] == "o"
@@ -52,5 +52,4 @@ def winner(board)
         else 
     false
     end
-end 
 end 
