@@ -1,5 +1,7 @@
 require "minitest/autorun"
 require_relative "tictactoe.rb"
+require_relative "birb.rb"
+require_relative "rell.rb"
 
 class TestTicTacToe < Minitest::Test 
 
@@ -88,4 +90,16 @@ class TestTicTacToe < Minitest::Test
     #     grid = ["x","o","x","x","o","o","x","1","x"]
     #     assert_equal(true, winner?(grid))
     # end
+
+    def test_birb
+        first = Bird.new("frank", "beckey lemme smash")
+        assert_equal("frank", first.first)
+        assert_equal("beckey lemme smash", first.sound)
+    end 
+
+    # def test_rell
+    #     area_name = Area.new(10,2)
+    #     assert_equal(20, area_name.rectangle)
+    #     assert_equal(10, area_name.triangle)
+    # end 
 end

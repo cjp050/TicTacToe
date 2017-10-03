@@ -1,55 +1,113 @@
-def turn(board, player, position)
-    # p board
-    # p player
-    # p position
-    board[position-1] = player
-    board
-end 
+require_relative 'board.rb'
+require_relative 'console_human.rb'
 
-def spot_open?(board, position)
-    if board[position-1] == 'x'||board[position-1] == 'o'
-        false 
-    elsif position >= 10||position <= 0
-        false 
-    else 
-        true 
-    end 
-end 
+class ConsoleGame
+    attr_accessor :player_1, :player_2, :board, :active_player, :move, :input1, :input2
 
-def change_player(current_player)
-    if current_player == "playerx"
-        "x"
-    elsif current_player == "playero"
-        "o"
-    end 
-end 
-
-def full_board(board)
-    if board.all? {|space| space.include?("x") || space.include?("o")}
-    board_full = true
-else 
-    board_full = "false"
-end 
-end 
-
-def winner?(board)
-          if  board[0] == "x" && board[1] == "x" && board[2] == "x" || board[0] == "o" && board[1] == "o" && board[2] == "o"
-    true
-        elsif board[3] == "x" && board[4] == "x" && board[5] == "x" || board[3] == "o" && board[4] == "o" && board[5] == "o"
-    true
-        elsif board[6] == "x" && board[7] == "x" && board[8] == "x" || board[6] == "o" && board[7] == "o" && board[8] == "o"
-    true
-        elsif board[0] == "x" && board[3] == "x" && board[6] == "x" || board[0] == "o" && board[3] == "o" && board[6] == "o"
-    true
-        elsif board[1] == "x" && board[4] == "x" && board[7] == "x" || board[1] == "o" && board[4] == "o" && board[7] == "o"    
-    true
-        elsif board[2] == "x" && board[5] == "x" && board[8] == "x" || board[2] == "o" && board[5] == "o" && board[8] == "o"
-    true
-        elsif board[0] == "x" && board[4] == "x" && board[8] == "x" || board[0] == "o" && board[4] == "o" && board[8] == "o"
-    true
-        elsif board[2] == "x" && board[4] == "x" && board[6] == "x" || board[2] == "o" && board[4] == "o" && board[6] == "o"
-    true
-        else 
-    false
+    def initialize
+        @player_1 = get_player1
+        @player_2 = get_player2
+        @board = Board.new
+        @active_player = player_1
     end
-end 
+
+    def intro
+        puts "Welcome to Tic-Tac-Toe!"
+    end
+
+    def display_board
+        puts " #{board.ttt_board[0]} | #{board.ttt_board[1]} | #{board.ttt_board[2]} "
+        puts "_____________"
+        puts " #{board.ttt_board[3]} | #{board.ttt_board[4]} | #{board.ttt_board[5]} "
+        puts "_____________"
+        puts " #{board.ttt_board[6]} | #{board.ttt_board[7]} | #{board.ttt_board[8]} "
+        puts ""
+
+        if check_winner || board.full_board?
+            puts "Game Over"
+        else
+            puts "It's #{active_player.marker}'s turn"
+        end
+    end
+
+    def get_move
+        active_player.get_move(board.ttt_board)
+    end
+
+    def update_board
+        marker = active_player.marker
+        move = get_move
+
+        if board.valid_position?(move)
+            board.update_position(move, marker)
+        else
+            puts "Invalid move, please choose again"
+            update_board
+        end
+    end
+
+    def change_player
+        if active_player == player_1
+            @active_player = player_2
+        else
+            @active_player = player_1
+        end
+    end
+
+    def check_winner
+        if board.winner?(active_player.marker)
+            true
+        else
+            false
+        end
+    end
+
+    def get_player1
+        puts """
+            Please select Player 1 by entering a number below
+            1 - Human
+            2 - Sequential
+            3 - Random
+            """
+        @input1 = gets.chomp.to_i
+
+        if input1 == 1
+            @player_1 = Human.new('X')
+
+        elsif input1 == 2
+            @player_1 = Sequential.new('X')
+
+        elsif input1 == 3
+            @player_1 = RandomAI.new('X')
+        
+        else
+            puts "Invalid input, please input 1, 2, or 3"
+            get_player1
+        end
+    end
+
+    def get_player2
+        puts """
+            Please select Player 2 by entering a number below
+            1 - Human
+            2 - Sequential
+            3 - Random
+            """
+        @input2 = gets.chomp.to_i
+
+        if input2 == 1
+            @player_2 = Human.new('O')
+
+        elsif input2 == 2
+            @player_2 = Sequential.new('O')
+
+        elsif input2 == 3
+            @player_2 = RandomAI.new('O')
+        
+        else
+            puts "Invalid input, please input 1, 2, or 3"
+            get_player2
+        end
+    end
+
+end
