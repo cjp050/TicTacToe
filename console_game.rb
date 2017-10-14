@@ -2,17 +2,21 @@ require_relative "tictactoe.rb"
 require_relative "console_human.rb"
 require_relative "perrian.rb"
 require_relative "random.rb"
+require_relative "unbeatable.rb"
 class ConsoleGame
     attr_accessor :player_1, :player_2, :board, :active_player, :move, :input1, :input2
+   
     def initialize
         @player_1 = get_player1
         @player_2 = get_player2
         @board = Board.new  
         @active_player = player_2
     end
+    
     def intro
         puts 'Welcome to tic-tac-toe'
     end
+  
     def display_board
       puts " #{board.ttt_board[0]} | #{board.ttt_board[1]} | #{board.ttt_board[2]} "
       puts "-----------"
@@ -27,9 +31,11 @@ class ConsoleGame
       end
     
     end
+    
     def get_move
         active_player.get_move(board.ttt_board) 
     end
+    
     def update_board
         marker = active_player.marker
         move = get_move
@@ -47,7 +53,8 @@ class ConsoleGame
     else
         @active_player = player_1
     end
-end
+    end
+
     def check_winner
         if board.winner?(active_player.marker)
             true
@@ -55,6 +62,7 @@ end
             false
         end 
     end
+   
     def get_player1
         puts """
             Please select player 1 by entering a number below
@@ -71,12 +79,13 @@ end
         elsif input1 == 3
             @player_1 = Random.new('X')
         elsif input1 == 4
-            @player_1 = UnbeatableAI.new('X')
+            @player_1 = Impossible.new('X')
         else 
             puts "Invalid input, please input 1, 2, 3, or 4"
             get_player1
         end
     end
+   
     def get_player2
         puts """
             Please select player 1 by entering a number below
@@ -93,7 +102,7 @@ end
         elsif input2 == 3
             @player_2 = Random.new('O')
         elsif input2 == 4 
-            @player_2 = UnbeatableAI.new('O')
+            @player_2 = Impossible.new('O')
         else 
             puts "Invalid input"
             get_player2

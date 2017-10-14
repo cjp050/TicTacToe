@@ -1,3 +1,0 @@
-check board state
-check player symbol
-check user input
