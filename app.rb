@@ -1,12 +1,25 @@
+require "rubygems"
 require "sinatra"
+require "pg"
 require_relative 'boardapp.rb'
 require_relative 'unbeatableapp.rb'
 require_relative 'classes_app.rb'
 enable 'sessions'
+load './local_env.rb' if File.exist?('./local_env.rb')
 
+ db_params = {
+ 	host: ENV['host'],
+ 	port: ENV['port'],
+ 	dbname: ENV['db_name'],
+ 	user: ENV['user'],
+ 	password: ENV['password']
+ }
+
+db = PG::Connection.new(db_params)
 
 	get '/' do
 		session[:board] = Board.new
+		phonebook = db.exec("Select * From ttt")
 		erb :welcome, :locals => {board: session[:board]}
 	end
 
@@ -16,6 +29,8 @@ enable 'sessions'
 		puts "#{session[:player2_type]} play 2 type"
 		session[:human1] = 'no'
 		session[:human2] = 'no'
+		session[:p1] = params[:p1]
+		session[:p2] = params[:p2]
 		if session[:player1_type] == 'Human'
 			session[:player1] = Human.new('X')
 			session[:human1] = 'yes'
@@ -74,6 +89,7 @@ puts "#{session[:player2]} playe 2"
 	get '/check_game_state' do
 		if session[:board].winner?(session[:active_player].marker)
 			message = "#{session[:active_player].marker} is the winner! good job"
+			db.exec("INSERT INTO ttt(p1, p2, winner) VALUES('#{session[:p1]}', '#{session[:p2]}',  '#{message}')")
 			erb :game_over, :locals => {board: session[:board], message: message}
 		elsif session[:board].full_board?
 			message = "Cat took the game, sorry."
@@ -104,3 +120,14 @@ puts "#{session[:player2]} playe 2"
 		session[:player2_type] = nil
 		redirect '/'
 	end
+
+	get '/game_results' do
+		ttt = db.exec("Select * From ttt");
+		erb :game_history, locals: {ttt: ttt}
+	end
+
+	post '/game_results' do
+		session[:player1] = params[:player1]
+		session[:player2] = params[:player2]
+		session[:winner] = params[:winner]
+end

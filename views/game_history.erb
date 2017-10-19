@@ -1,0 +1,23 @@
+<HTML>
+<link rel="stylesheet" href="./css/style.css">
+<center><h1 class='title'>Tic Tac Toe</h1>
+<table id="myTable">
+  <tr class="header">
+    <th>Player 1</th>
+    <th>Player 2</th>
+    <th>Winner</th>
+   
+  </tr>
+ 
+<%ttt.each do |value|%>
+<tr>
+<td><%=value['p1']%> </td>
+<td><%=value['p2']%> </td> 
+
+<td><%=value['winner']%> </td>
+
+</tr>
+<%end%>
+</table>
+</center>
+</HTML>
