@@ -1,6 +1,16 @@
+<head>
 <link rel="stylesheet" href="css/style.css">
 <center><h1 class='title'>Tic Tac Toe</h1>
 <h1 class='title_3'><%=message%></h1></center>
+<script type="text/javascript">
+document.write ('<p><span id="date-time">', new Date().toLocaleString(), '<\/span>.<\/p>')
+if (document.getElementById) onload = function () {
+	setInterval ("document.getElementById ('date-time').firstChild.data = new Date().toLocaleString()", 50)
+}
+</script>
+</head>
+
+<body onload="startTime()">
 <table id="table_size">
     <tr>
         <td><div class="win_display"><%=board.ttt_board[0]%></div></td>
@@ -19,6 +29,8 @@
     </tr>
 </table>
 </center>
+</body>
+
 <center>
 <p class='link'><a href='/clear_sessions'><img src= "./img/re.jpg" style="width:100px;height:75px;"></a>
 </center>

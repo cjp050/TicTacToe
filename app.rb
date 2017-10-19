@@ -2,10 +2,10 @@ require "sinatra"
 require_relative 'boardapp.rb'
 require_relative 'unbeatableapp.rb'
 require_relative 'classes_app.rb'
-enable :sessions
+enable 'sessions'
+
 
 	get '/' do
-	
 		session[:board] = Board.new
 		erb :welcome, :locals => {board: session[:board]}
 	end
@@ -73,7 +73,7 @@ puts "#{session[:player2]} playe 2"
 
 	get '/check_game_state' do
 		if session[:board].winner?(session[:active_player].marker)
-			message = "#{session[:active_player].marker} is the winner!"
+			message = "#{session[:active_player].marker} is the winner! good job"
 			erb :game_over, :locals => {board: session[:board], message: message}
 		elsif session[:board].full_board?
 			message = "Cat took the game, sorry."

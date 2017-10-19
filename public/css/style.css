@@ -87,3 +87,24 @@ center#cheat {
     vertical-align: center;
     font-size: 5em;
 }
+
+span#date-time {
+    margin-left: 655px;
+    border-bottom-style: solid;
+    border-bottom-width: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    background-color: purple;
+    border: 4px solid gold;
+}
+
+p {
+    margin-top: -20px;
+}
+
+img {
+    width: 100px;
+    height: 75px;
+    margin-left: 1250px;
+    margin-bottom: 12px;
+}
