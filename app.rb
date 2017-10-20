@@ -88,7 +88,7 @@ puts "#{session[:player2]} playe 2"
 	get '/check_game_state' do
 		if session[:board].winner?(session[:active_player].marker)
 			message = "#{session[:active_player].marker} is the winner! good job"
-			db.exec("INSERT INTO ttt(p1, p2, winner) VALUES('#{session[:p1]}', '#{session[:p2]}',  '#{message}')")
+			db.exec("INSERT INTO ttt(p1, p2, winner, time) VALUES('#{session[:p1]}', '#{session[:p2]}',  '#{message}', '#{Time.now}')")
 			erb :game_over, :locals => {board: session[:board], message: message}
 		elsif session[:board].full_board?
 			message = "Cat took the game, sorry."
