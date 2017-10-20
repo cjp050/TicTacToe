@@ -1,5 +1,5 @@
 require "sinatra"
-#require "pg"
+require "pg"
 require_relative 'boardapp.rb'
 require_relative 'unbeatableapp.rb'
 require_relative 'classes_app.rb'
