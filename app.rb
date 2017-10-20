@@ -1,4 +1,3 @@
-require "rubygems"
 require "sinatra"
 require "pg"
 require_relative 'boardapp.rb'
