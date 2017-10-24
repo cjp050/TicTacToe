@@ -9,16 +9,18 @@
     <th>Winner</th>
    
   </tr>
- 
+ <center>
 <%ttt.each do |value|%>
 <tr>
 <td><%=value['p1']%> </td>
 <td><%=value['p2']%> </td> 
 <td><%=value['time']%> </td>
 <td><%=value['winner']%> </td>
+</center>
 
 </tr>
 <%end%>
 </table>
+<p class='link'><a href='/clear_sessions'><img src= "./img/re.jpg" style="width:100px;height:75px;"></a>
 </center>
 </HTML>

@@ -108,3 +108,8 @@ img {
     margin-left: 1250px;
     margin-bottom: 12px;
 }
+
+table#myTable {
+    background-color: goldenrod;
+    border: 4px solid cyan;
+}
