@@ -14,7 +14,7 @@ GEM
     tilt (2.0.8)
 
 PLATFORMS
-  
+  x64-mingw32
 
 DEPENDENCIES
   pg (= 0.21.0)
