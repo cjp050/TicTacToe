@@ -9,7 +9,7 @@ load './local_env.rb' if File.exist?('./local_env.rb')
  db_params = {
  	host: ENV['host'],
  	port: ENV['port'],
- 	dbname: ENV['db_name'],
+ 	dbname: ENV['dbname'],
  	user: ENV['user'],
  	password: ENV['password']
  }
