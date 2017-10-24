@@ -19,7 +19,7 @@ db = PG::Connection.new(db_params)
 	get '/' do
 		session[:board] = Board.new
 		phonebook = db.exec("Select * From ttt")
-		erb :welcome, :locals => {phonebook: phonebook, board: session[:board]}
+		erb :welcome, :locals => {board: session[:board]}
 	end
 
 	post '/select_players' do
