@@ -41,8 +41,8 @@ h2.title_3 {
 
 .square_size {
     border: none;
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
     font-size: 2.5em;
     color: black;
     text-shadow: 2px 2px 5px teal;
